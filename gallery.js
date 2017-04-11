@@ -22,7 +22,8 @@ function gallery_initialize(){
     if (event.keyCode == 39) gallery_goto_next_photo();
   });
 
-  // create a callback for when new images finish loading
+  // This callback is executed when a photo finishes loading.
+  // It is a counterpart to the gallery_begin_photo_load_process() function.
   document.getElementById('photo').addEventListener('load', gallery_end_photo_load_process);
 }
 
@@ -32,7 +33,10 @@ function gallery_initialize(){
  *  It places the application into a "loading" state.
  */
 function gallery_enable_loadstate(){
+  // adjust global state
   window.loading = true;
+
+  // adjust DOM class
   document.getElementById('page').className = "loading";
 }
 
@@ -41,9 +45,13 @@ function gallery_enable_loadstate(){
  *  It removes the application's "loading" state.
  */
 function gallery_disable_loadstate(){
+  // adjust global state
   window.loading = false;
+
+  // adjust DOM class
   document.getElementById('page').className = "loaded";
 
+  // disable buttons if we are on the first or last photo
   document.getElementById('prev_button').className = (window.current_photo == 0) ? "button disabled" : "button";
   document.getElementById('next_button').className = (window.current_photo == window.photos.length - 1) ? "button disabled" : "button";
 }
@@ -53,9 +61,16 @@ function gallery_disable_loadstate(){
  *  It is triggered by the "next" button or a right-arrow keyboard press.
  */
 function gallery_goto_next_photo(){
-  if (window.current_photo == window.photos.length - 1) return; // do not run if there is no next photo
-  if (window.loading) return; // do not run if we are in the load-state
+  // do not run if there is no next photo
+  if (window.current_photo == window.photos.length - 1) return;
+
+  // do not run if we are in the load-state
+  if (window.loading) return;
+
+  // adjust global state
   window.current_photo++;
+
+  // load the new photo
   gallery_begin_photo_load_process();
 }
 
@@ -64,9 +79,16 @@ function gallery_goto_next_photo(){
  *  It is triggered by the "previous" button or a left-arrow keyboard press.
  */
 function gallery_goto_previous_photo(){
-  if (window.current_photo == 0) return; // do not run if there is no previous photo
-  if (window.loading) return; // do not run if we are in the load-state
+  // do not run if there is no previous photo
+  if (window.current_photo == 0) return;
+
+  // do not run if we are in the load-state
+  if (window.loading) return;
+
+  // adjust global state
   window.current_photo--;
+
+  // load the new photo
   gallery_begin_photo_load_process();
 }
 
@@ -76,7 +98,11 @@ function gallery_goto_previous_photo(){
  */
 function gallery_begin_photo_load_process(){
   gallery_enable_loadstate();
+
+  // begin loading the new photo
   document.getElementById('photo').src = window.photos[window.current_photo]['url'];
+
+  // hide the title and index fields
   document.getElementById('title').innerHTML = "&nbsp;";
   document.getElementById('index').innerHTML = "&nbsp;";
 }
@@ -87,6 +113,8 @@ function gallery_begin_photo_load_process(){
  */
 function gallery_end_photo_load_process(){
   gallery_disable_loadstate();
+
+  // display new info in the title and index fields
   document.getElementById('title').innerHTML = window.photos[window.current_photo]['title'];
   document.getElementById('index').innerHTML = window.current_photo;
 }
