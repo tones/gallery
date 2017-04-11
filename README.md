@@ -15,7 +15,7 @@ Photo gallery
 ## Ruminations
 
   * It's a fun refresher to write client-side javascript with no framework or third-party libraries!
-  * I make heavy use of global variables, in the form of `window` properties. This was a tricky architectural decision. It would make these functions difficult to write tests for, and it muddies the separation of responsibilities between the Gallery and API concerns. A more scalable and robust approach might have been to pass a state object between the functions, or to adopt an OOP approach and store variables in `Gallery` and `API` objects. But, seeing as we're building a small app with a short lifespan and no proscriptive framework, I decided globals were a reasonable shortcut.
+  * I make heavy use of global variables, in the form of `window` properties. This was a tricky architectural decision. It would make the app difficult to write tests for, and it muddies the separation of responsibilities between the Gallery and API concerns. A more scalable and robust solution might have been to pass a state object between the functions, or to adopt an object-oriented approach by storing variables and functions in `Gallery` and `API` objects. But, seeing as we're building a small app with a short lifespan and no proscriptive framework, I decided globals were a reasonable shortcut.
 
 
 ## Scope and Assumptions
