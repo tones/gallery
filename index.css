@@ -1,0 +1,112 @@
+/* WRAPPER STYLES */
+
+body {
+  background-color: #222;
+  color: #eee;
+  margin: 0;
+  user-select: none;
+}
+
+#page {
+  position: relative;
+  margin: 0 auto;
+
+  width: 100%;
+  min-width: 500px;
+  max-width: 700px;
+
+  height: 100vh;
+  min-height: 500px;
+  max-height: 600px;
+
+  text-align: center;
+}
+
+#page #text {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+
+
+/* PHOTO STYLES */
+
+#page #photo {
+  margin-top: 20px;
+}
+
+#page.initial #photo {
+  opacity: 0;
+}
+
+#page.loading #photo {
+  animation: 0.5s fadeout;
+  opacity: 0;
+}
+
+#page.loaded #photo {
+  animation: 0.5s fadein;
+  opacity: 1.0;
+}
+
+
+
+/* BUTTON STYLES */
+
+#page .button {
+  position: absolute;
+  font-size: 12em;
+  cursor: pointer;
+}
+
+#page.loading .button,
+#page .button.disabled {
+  cursor: default;
+  opacity: 0.2;
+}
+
+#page .button#prev_button {
+  left: 20px;
+  bottom: 0;
+}
+
+#page .button#next_button {
+  right: 20px;
+  bottom: 0;
+}
+
+
+/* PINWHEEL STYLES */
+
+#page #pinwheel {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  opacity: 0;
+}
+
+#page.loading #pinwheel {
+  opacity: 1.0;
+}
+
+#page.loaded #pinwheel {
+  opacity: 0;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes fadeout {
+  from {opacity: 1.0;}
+  to {opacity: 0;}
+}
+
+@keyframes fadein {
+  from {opacity: 0.0;}
+  to {opacity: 1.0;}
+}
